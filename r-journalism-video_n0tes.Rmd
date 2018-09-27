@@ -1,16 +1,16 @@
 ---
 title: "NOTES FROM: Data Challenge with Andrew Ba Tran and Hadley Wickham - 2018-08-17"
-output: github_document
+output:
+  html_notebook:
+      highlight: kate
+      theme: simplex
+      toc: yes
 ---
 
 ```{r setup, results='hide'}
 # add these to yaml for pdf or github README
 # output: hrbrthemes::ipsum_pdf
-# output: 
-  # html_notebook: 
-    # highlight: kate
-    # theme: simplex
-    # toc: yes
+# output: github_document
 knitr::opts_chunk$set(echo = TRUE, 
                       tidy = FALSE,
                       # dev = "cairo_pdf",
