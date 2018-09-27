@@ -1,11 +1,15 @@
 NOTES FROM: Data Challenge with Andrew Ba Tran and Hadley Wickham -
 2018-08-17
 ================
-Martin Frigaard
 
 ``` r
-# add this to yaml for pdf
+# add these to yaml for pdf or github README
 # output: hrbrthemes::ipsum_pdf
+# output: 
+  # html_notebook: 
+    # highlight: kate
+    # theme: simplex
+    # toc: yes
 knitr::opts_chunk$set(echo = TRUE, 
                       tidy = FALSE,
                       # dev = "cairo_pdf",
@@ -23,7 +27,7 @@ library(extrafont)
     ## Registering fonts with R
 
 ``` r
-# extrafont::loadfonts()
+# extrafont::loadfonts() # for PDF fonts
 ```
 
 # Overview
@@ -432,8 +436,8 @@ PFDRTable %>%
     View()
 ```
 
-Note that Hadley ***visually inspects the data a lot to verify what he’s
-done produced what he was expecting***.
+Note that Hadley ***visually inspects the data a lot to verify what the
+code has done what he was expecting***.
 
 > Hadley: I think Andrew said that we only mostly care about the annual
 > report in 2018
@@ -1096,6 +1100,82 @@ AcostaPosition
     ## 7 5 American Bar Association Commis… Profession… Chairman     8/2015 4/20…
     ## 8 Hispanic Legal Rights and Respons… Organizati… ""           ""     ""
 
+> Hadley: so now we have the next problem which is some of these lines
+> are not actually just carried over from the previous line this line
+> with the type as `ge` clearly. what I should be doing is pasting that
+> together with the previous line…
+
+Then Andrew chimes in about twitter.
+
+> Andrew: I’m pretty sure I tweeted about this
+
+> Andrew: you mutate fill and filter and you use direction up or
+> down…fill and direction…
+
+Twitter is an excellent resource for quick \#rstats answers–many times I
+end up reweeting or emailing myself bits of code to save for later.
+
+> Hadley: …and this is a slightly different problem isn’t it? oh yeah so
+> let me…I’m just gonna write some code and then if it works…I’ll
+> explain…I just have some intuition about how that’s might work.
+
+The ‘intuition’ has probably been developed over time from the countless
+analyses Hadley’s performed, but it’s also clear to me that the
+functions Hadley uses have become almost second nature–he thinks ***in
+terms*** of functions and the actions they perform. This is an important
+step in skill acquisition and learning (see
+[chunking](https://en.wikipedia.org/wiki/Chunking_\(psychology\))). For
+example, I have no doubt that the verbs the tidyverse functions are
+based on mean something different in Hadley’s brain than mine, and he no
+longer has to think about the ‘thing’ he wants to be performed, and the
+‘function’ he needs to use.
+
+Below is a little more from Hadley thought process. Pay attention to how
+much trial and error occurs and the problems get solved bit-by-bit.
+
+> Hadley: I’m gonna call this type 2 I’m gonna fill - yeah this and then
+> I’m just gonna make it a little easier…just gonna narrow it down to
+> look at these two…oh whoops that’s not how it works…okay yes now it’s
+> slightly coming back… and let’s see how that worked…okay so all I have
+> managed to do is put this and this…now I can…I’m just going to show
+> you those two columns but, now you can see basically all I’ve managed
+> to do is put it in its own column to the side and when it isn’t
+> carried over I’ve got `NA`’s…and so now what I can do is `fill()`
+> `type2` `up` this “`direction`”…and that is coming…I forget how to use
+> `direction`…that would make sense…okay now I’ve got them on the same
+> line…now I’m gonna call it `type3` so you can see what’s going on…I’m
+> just going to combine `type` and `type2` and then print them that so
+> you can see…
+
+There is a lot of trying a series of steps, reorganizing, trying
+something else. Acknowledgment that he *doesn’t remember how* a
+particular function might work, but takes the time to figure it out.
+
+> Hadley: There are some lines where I’ve ended up with nonsense…but I’m
+> gonna get rid of that line anyway…so I don’t really care.
+
+This is helpful–articulating what **NOT** to get hung up on.
+
+> Hadley: Let’s just look at the whole thing again, I just solved it for
+> one and I’m just gonna leave it there so you basically get the idea.
+> At this point, I don’t know exactly what I have done but it seems to
+> have worked…
+
+This is a typical remark I find in old code of mine and on Github. I
+will see a series of functions with a comment that says something like,
+“don’t know how/why this works, but it does. DON’T TOUCH\!”
+
+> Hadley: …and so now if I was doing a real analysis I would sit down
+> and think, “that seemed to require a lot of steps, and some of those
+> steps I put in to explain my thinking…but I think some of them, maybe
+> now that I’ve solved it, it’s a good opportunity to go back and
+> say,”could I solve this better in some way?", before I go on to the
+> next challenge.
+
+So the steps are 1) drill the problem down to the smallest, solvable
+elements, 2) get something that works, and 3) come back and reevaluate
+later.
+
 ``` r
 AcostaPosition %>% 
   # what is (to == "") doing?
@@ -1125,3 +1205,29 @@ AcostaPosition %>%
     ## 3 FALSE     Non-Profit       ""           Non-Profit              
     ## 4 FALSE     Corporation      ""           Corporation             
     ## 5 FALSE     Professional     Organization ProfessionalOrganization
+
+Hadley also mentions turning the process into a function, but the time
+for this tutorial ran out.
+
+## Other takeaways
+
+  - **He specifically mentions being able to type very fast.**
+    Everything in this field comes down to neurons and keystrokes, and
+    *both* of these can be improved drastically with daily practice.
+
+Typing and organizing your workflow are the ‘fundamental basketball’
+skills in data science. Hadley has even posted
+[videos](https://www.youtube.com/watch?v=boKFxBniUH0) showing him using
+applications that allow him to quickly move between the
+projects/files/software programs on his computer.
+
+  - **Hadley didn’t open a new project or folder.** The .Rproj file
+    would’ve saved the day, and he acknowledges he might’ve accidentally
+    downloaded the .pdfs into his home directory.
+
+He also didn’t update any packages, use the .Rmd files, or introduce any
+other concepts outside the .R script and RStudio IDE. This is a
+testament to how quickly you can get started on a project with RStudio.
+
+This was a great video to watch and learn from, and I hope both Hadley
+and Andrew to keep sharing their work and expertise.
